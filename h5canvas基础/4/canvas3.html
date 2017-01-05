@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+body{ background:#000; font-size:30px; color:#FFF;}
+#c1{ background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	var ali=document.getElementsByTagName('li');
+	for(var i=0;i<ali.length;i++){
+		ali[i].onclick=function(){
+			occ.clearRect(0,0,oc.width,oc.height);
+				var str=this.innerHTML;
+				var s=180;
+				occ.font=s+'px 黑体';
+				occ.textBaseline='top';
+				occ.fillStyle='blue';
+				var w=occ.measureText(str).width;
+				occ.fillText(str,(oc.width-w)/2,(oc.height-s)/2);
+				var oimg=occ.getImageData((oc.width-w)/2,(oc.height-s)/2,w,s);
+				occ.clearRect(0,0,oc.width,oc.height);
+				var arr=randomArr(w*s,w*s/10);
+				
+				var newimg=occ.createImageData(w,s);
+				for(var i=0;i<arr.length;i++){
+					newimg.data[4*arr[i]]=oimg.data[4*arr[i]];
+					newimg.data[4*arr[i]+1]=oimg.data[4*arr[i]+1];
+					newimg.data[4*arr[i]+2]=oimg.data[4*arr[i]+2];
+					newimg.data[4*arr[i]+3]=oimg.data[4*arr[i]+3];
+					
+					}
+					occ.putImageData(newimg,(oc.width - w)/2,(oc.height - s)/2);
+			};
+		}
+	function randomArr(iall,inow){
+			var arr=[];
+			var newarr=[];
+			for(var i=0;i<iall;i++){
+				arr.push(i);
+				}
+			for(var i=0;i<inow;i++){
+				newarr.push(arr.splice(Math.floor(Math.random()*arr.length),1));
+				}
+			return newarr;
+		}	
+	
+	}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+<ul style="float:left">
+	<li>心</li>
+    <li>幻</li>
+    <li>枫</li>
+    <li>林</li>
+</ul>
+</body>
+</html>

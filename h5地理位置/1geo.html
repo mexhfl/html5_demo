@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>地理位置</title>
+<script>
+window.onload=function(){
+	var obtn=document.getElementById('btn');
+	var ot=document.getElementById('t1');
+	obtn.onclick=function(){
+		navigator.geolocation.getCurrentPosition(function(position){
+			ot.value+='经度 ：'+position.coords.longitude+'\n';
+			ot.value+='纬度 ：'+position.coords.latitude+'\n';
+			ot.value+='准确度 ：'+position.coords.accuracy+'\n';
+			ot.value+='海拔 ：'+position.coords.altitude+'\n';
+			ot.value+='海拔准确度 ：'+position.coords.altitudeAcuracy+'\n';
+			ot.value+='行进方向 ：'+position.coords.heading+'\n';
+			ot.value+='地面速度 ：'+position.coords.speed+'\n';
+			ot.value+='时间戳 ：'+new Date(position.timestamp)+'\n';
+			},function(err){
+				alert(err.code);
+				},{
+					enableHighAcuracy :true,
+					timeout :5000,
+					maximumAge :5000
+					});
+		
+		}
+	}
+</script>
+</head>
+
+<body>
+<input type="button" value="请求" id="btn" /></br>
+<textarea id="t1" style="width:400px;height:400px;border:1px #000000 solid;"></textarea>
+
+</body>
+</html>

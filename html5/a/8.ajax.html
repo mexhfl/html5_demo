@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ajax</title>
+<script>
+window.onload=function(){
+	var obtn=document.getElementById('btn');
+	obtn.onclick=function(){
+		var xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4){
+				if(xhr.status==200){
+					alert(xhr.responseText);
+					}
+				}
+			}
+			
+			xhr.open('get','http://www.b.com/ajax.php',true);
+			xhr.send();
+		}
+	}
+</script>
+</head>
+
+<body>
+
+<input type="button" id="btn" value="获取同域下内容"/>
+</body>
+</html>

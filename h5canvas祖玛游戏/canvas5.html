@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+*{ margin:0px; padding:0px}
+body{ background:#000;}
+#div1{ width:600px; margin:20px auto; background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	var i=0;
+	
+	var oimg=new Image();
+	oimg.src='person.png';
+	oimg.onload=function(){
+		
+		
+/*	occ.beginPath();
+	occ.arc(300,200,200,-90*Math.PI/180,180*Math.PI/180,false);
+	//occ.closePath();
+	occ.stroke();
+	
+	occ.beginPath();
+	occ.arc(250,200,150,0,180*Math.PI/180,true);
+	occ.stroke();
+	
+	occ.beginPath();
+	occ.arc(400,200,20,0,360*Math.PI/180,false);
+	occ.stroke();*/
+
+	
+
+
+	setInterval(function(){
+		
+		
+		
+
+		
+		occ.clearRect(0,0,oc.width,oc.height);
+		
+		
+		occ.beginPath();
+		occ.arc(i++,i++,20,0,360*Math.PI/180,false);
+		occ.stroke();
+		
+		
+		
+		occ.beginPath();
+		occ.arc(300,200,200,-90*Math.PI/180,180*Math.PI/180,false);
+		//occ.closePath();
+		occ.stroke();
+		
+		occ.beginPath();
+		occ.arc(250,200,150,0,180*Math.PI/180,true);
+		occ.stroke();
+		
+		occ.beginPath();
+		occ.arc(400,200,20,0,360*Math.PI/180,false);
+		occ.stroke();
+		
+		
+		for(var a=0;a<ball.length;a++){
+
+		  occ.beginPath();
+		  occ.moveTo(ball[a].x,ball[a].y);
+		  occ.arc(ball[a].x,ball[a].y,20,0,360*Math.PI/180,false);
+		  occ.fill();
+
+			}
+		
+
+		
+		
+		
+		occ.save();
+		occ.translate(300,200);
+		occ.rotate(irotate);
+		occ.translate(-40,-40);
+		occ.drawImage(oimg,0,0);
+		occ.restore();
+		
+								for(var a=0;a<bullet.length;a++){
+				occ.save();
+				occ.fillStyle = 'red';
+				occ.beginPath();
+				occ.moveTo(bullet[a].x,bullet[a].y);
+				occ.arc(bullet[a].x,bullet[a].y,20,0,360*Math.PI/180,false);
+				occ.fill();
+				occ.restore();
+				}
+		
+
+
+	
+		},1000/60);
+		
+
+		setInterval(function(){
+			for(var i=0;i<ball.length;i++){
+				ball[i].num++;
+				if(ball[i].num==270){
+					ball[i].r=150;
+					ball[i].startX=250;
+					ball[i].startY=50;
+					}
+					
+				if(ball[i].num==270+180){
+					alert('游戏结束');
+					window.location.reload();
+					}
+					
+				ball[i].x=Math.sin(ball[i].num*Math.PI/180)*ball[i].r+ball[i].startX;
+				ball[i].y=ball[i].r-Math.cos(ball[i].num*Math.PI/180)*ball[i].r+ball[i].startY;
+				
+				}
+		
+		
+				for(var a=0;a<bullet.length;a++){
+				bullet[a].x = bullet[a].x + bullet[a].sx;
+				bullet[a].y = bullet[a].y + bullet[a].sy;
+					
+					}
+
+		
+			},30);
+		
+		
+		var ball=[];
+		
+		setInterval(function(){
+			ball.push({
+			x:300,
+			y:0,
+			r:200,
+			num:0,
+			startX:300,
+			startY:0
+			});
+			},350);
+		
+		
+		var irotate=0;
+		oc.onmousemove=function(ev){
+			
+			var ev=ev||window.event;
+			var x=ev.clientX-oc.offsetLeft;
+			var y=ev.clientY-oc.offsetTop;
+			
+			var a=x-300;
+			var b=y-200;
+			var c=Math.sqrt( a*a+b*b);
+			
+			if(a>0 && b>0){
+				irotate=Math.asin(b/c)+90*Math.PI/180;
+				}else if(a>0){
+				irotate=Math.asin(a/c);
+				}
+			if(a<0 && b>0){
+				irotate=-(Math.asin(b/c)+90*Math.PI/180);
+				}else if(a<0){
+				irotate=Math.asin(a/c);
+				}
+			
+			}
+			
+		
+		var bullet=[];
+		oc.onmousedown=function(ev){
+			
+			var ev=ev||window.event;
+			var x=ev.clientX-oc.offsetLeft;
+			var y=ev.clientY-oc.offsetTop;
+			
+			var a=x-300;
+			var b=y-200;
+			var c=Math.sqrt( a*a+b*b);
+			
+			var speed=5;
+			var sx = speed * a/c;
+			var sy = speed * b/c;
+			
+			bullet.push({
+				x:300,
+				y:200,
+				sx:sx,
+				xy:sy
+				});
+			
+			}
+		
+		};
+	
+	
+	
+	
+	}
+</script>
+</head>
+
+<body>
+<div id="div1">
+<canvas id="c1" width="600px" height="600px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+</div>
+</body>
+</html>

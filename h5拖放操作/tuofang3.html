@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>拖放3</title>
+<style>
+
+#div1{
+	width: 100px;
+	height: 100px;
+	background: red;
+	margin: 200px;
+	}
+li{
+	list-style-type:none;
+	}
+</style>
+<script>
+window.onload=function(){
+	
+	var odiv=document.getElementById('div1');
+	var oul=document.getElementById('ul1');
+
+	odiv.ondragenter=function(){
+		this.style.background='blue';
+		this.innerHTML='释放鼠标';
+		}
+	odiv.ondragover=function(ev){
+		
+		ev.preventDefault();
+		}
+	odiv.ondragleave=function(){
+		this.innerHTML='将文件拖放至此区域';
+		this.style.background='red';
+		}
+		
+		
+	odiv.ondrop=function(ev){
+		//alert(ev.dataTransfer.getData('name'));
+		ev.preventDefault();
+		var fs=ev.dataTransfer.files;
+		//alert(fs.length);
+		//alert(fs[0].type);
+		var w=0;
+		for(w=0;w<fs.length;w++){
+		if(fs[w].type.indexOf('image')!=-1){
+		var fd=new FileReader();
+		fd.readAsDataURL(fs[w]);
+		fd.onload=function(){
+			var oli=document.createElement('li');
+			var oimg=document.createElement('img');
+			oimg.style.width='100px';
+			oimg.style.height='100px';
+			oimg.style.margin='10px';
+			oimg.style.float='left';
+			oimg.src=this.result;
+			oli.appendChild(oimg);
+			oul.appendChild(oli);
+			}
+		}else{
+			var x=w+1;
+			alert('第'+x+'个文件类型不对；请传图片');
+			}
+		}
+		} 
+	}
+	
+</script>
+</head>
+
+<body>
+
+<div id="div1">将文件拖放至此区域</div>
+<ul id="ul1"></ul>
+</body>
+</html>

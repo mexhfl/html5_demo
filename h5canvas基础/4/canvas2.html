@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+body{ background:#000;}
+#c1{ background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	//occ.fillRect(0,0,100,100);
+	var oimg=occ.createImageData(200,200);
+	//alert(oimg.width);
+	//alert(oimg.height);
+	for(var i=0;i<oimg.width*oimg.height;i++){
+			oimg.data[4*i]=0;
+			oimg.data[4*i+1]=255;
+			oimg.data[4*i+2]=0;
+			oimg.data[4*i+3]=100;
+		}
+
+	occ.putImageData(oimg,100,100);
+	}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+<p style="color:#FFF">createImageData方式创建矩阵<p>
+</body>
+</html>

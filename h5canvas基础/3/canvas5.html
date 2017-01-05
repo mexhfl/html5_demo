@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+body{ background:#000;}
+#c1{ background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	
+
+	occ.font='60px 黑体';
+	occ.textBaseline='top';
+	
+	//var h=occ.measureText('文字居中').height;
+	
+	var w=occ.measureText('文字居中').width;
+	
+	occ.fillText('文字居中',(oc.width-w)/2,(oc.height-60)/2);
+	
+
+	}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+</body>
+</html>

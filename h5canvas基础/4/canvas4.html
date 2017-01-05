@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+body{ background:#000; font-size:30px; color:#FFF;}
+#c1{ background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	occ.fillRect(0,0,100,100);
+	var oimg=occ.getImageData(0,0,100,100);
+	//alert(getXY(oimg,3,5));
+	for(var i=0;i<oimg.width;i++){
+		setXY(oimg,i,5,[255,0,0,255]);
+		}
+	
+	occ.putImageData(oimg,100,100);
+	
+	function getXY(obj,x,y){
+		var w=obj.width;
+		var h=obj.height;
+		var d=obj.data;
+		
+		var color=[];
+		color[0]=d[4*(y*w+x)];
+		color[1]=d[4*(y*w+x)+1];
+		color[2]=d[4*(y*w+x)+2];
+		color[3]=d[4*(y*w+x)+3];
+		return color;
+		}
+	function setXY(obj,x,y,color){
+		
+				var w=obj.width;
+				var h=obj.height;
+				var d=obj.data;
+				
+
+				d[4*(y*w+x)]=color[0];
+				d[4*(y*w+x)+1]=color[1];
+				d[4*(y*w+x)+2]=color[2];
+				d[4*(y*w+x)+3]=color[3];
+
+		}
+	}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+
+</body>
+</html>

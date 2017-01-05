@@ -1,0 +1,6 @@
+FileReader读取图片对象
+
+readAsDataURL读取图片信息
+
+this.result读取图片的数据
+

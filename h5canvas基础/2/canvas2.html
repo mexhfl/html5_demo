@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+body{ background:#000;}
+#c1{ background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	function todraw(){
+		var x=200;
+		var y=200;
+		var r=150;
+		
+		var odate=new Date();
+		var oHours=odate.getHours();
+		var oMin=odate.getMinutes();
+		var oSen=odate.getSeconds();
+		
+		var ohouval = ( -90 + oHours*30 ) * Math.PI/180;
+		var ominval = ( -90 + oMin*6 ) * Math.PI/180;
+		var osecval = ( -90 + oSen*6 ) * Math.PI/180;
+
+		occ.clearRect(0,0,oc.width,oc.height);
+		/*
+		
+		var oDate = new Date();
+		var oHours = oDate.getHours();
+		var oMin = oDate.getMinutes();
+		var oSen = oDate.getSeconds();
+		
+		var ohouval = (-90 + oHours*30 + oMin/2) * Math.PI/180;
+		var ominval = (-90 + oMin*6) * Math.PI/180;
+		var osecval = (-90 + oSen*6) * Math.PI/180;
+		*/
+		
+		occ.beginPath();
+		for(var i=0;i<60;i++){
+		occ.moveTo(x,y);
+		occ.arc(x,y,r,6*i*Math.PI/180,6*(i+1)*Math.PI/180,false);
+		}
+		occ.closePath();
+		occ.stroke();
+		
+		
+		
+		occ.fillStyle='white';
+		occ.beginPath();
+		occ.moveTo(x,y);
+		occ.arc(x,y,r-5,0,360*Math.PI/180,false);
+		occ.closePath();
+		occ.fill();
+		
+		occ.beginPath();
+		occ.lineWidth='3';
+		for(var i=0;i<12;i++){
+		occ.moveTo(x,y);
+		occ.arc(x,y,r,30*i*Math.PI/180,30*(i+1)*Math.PI/180,false);
+		}
+		occ.closePath();
+		occ.stroke();
+
+
+		occ.beginPath();
+		occ.moveTo(x,y);
+		occ.arc(x,y,r-20,0,360*Math.PI/180,false);
+		occ.closePath();
+		occ.fill();
+		
+		occ.lineWidth=5;
+		occ.beginPath();
+		occ.moveTo(x,y);
+		occ.arc(x,y,r*12/20,ohouval,ohouval,false);
+		occ.closePath();
+		occ.stroke();
+		
+		
+		occ.lineWidth=3;
+		occ.beginPath();
+		occ.moveTo(x,y);
+		occ.arc(x,y,r*15/20,ominval,ominval,false);
+		occ.closePath();
+		occ.stroke();
+		
+		
+		occ.lineWidth=1;
+		occ.beginPath();
+		occ.moveTo(x,y);
+		occ.arc(x,y,r*18/20,osecval,osecval,false);
+		occ.closePath();
+		occ.stroke();
+		
+	}
+	setInterval(todraw,1000);
+	todraw();
+	}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+</body>
+</html>

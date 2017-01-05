@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>querySelector</title>
+<script>
+window.onload=function(){
+	//var adiv=document.querySelector('.box');
+	var adiv=document.getElementsByClassName('box');
+	//adiv.style.background='blue';
+	alert(adiv.length);
+	var idiv=document.getElementById('div1');
+	idiv.classList.add('box1');
+	}
+</script>
+
+</head>
+
+<body>
+<div id="div1" class="box">1111111</div>
+<div class="box">2222222222</div>
+</body>
+</html>

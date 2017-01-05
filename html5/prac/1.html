@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>拖拽联系</title>
+<style>
+*{padding:0px; margin:0px;}
+#div1{ width:400px; height:400px; background:#999; overflow:hidden;position:absolute; left:0px; top:0px;}
+#div2{ width:20px; height:20px; background:#F00; position:absolute; left:0px; top:0px; }
+</style>
+<script>
+window.onload=function(){
+var odiv1=document.getElementById('div1');
+var odiv2=document.getElementById('div2');
+var i=0;
+
+/*setInterval(spyd,1);
+function spyd(){
+	i++;
+	if(i>odiv1.offsetWidth-odiv2.offsetWidth){
+		i--;
+		
+		}
+
+		console.log(i);
+	odiv2.style.left=i+'px';
+	odiv2.style.top=i+'px';
+	}*/
+
+odiv2.onmousedown=function(ev){
+	var ev=ev||window.event;
+	
+	var x1=ev.clientX-odiv2.offsetLeft;
+	var y1=ev.clientY-odiv2.offsetTop;
+	//alert(x1);
+	document.onmousemove=function(ev){
+		var ev=ev||window.event;
+
+		odiv2.style.left=ev.clientX-x1+'px';
+		odiv2.style.top=ev.clientY-y1+'px';
+		
+		if(odiv2.offsetLeft<0){
+			odiv2.style.left=0;
+			}else if(odiv2.offsetLeft>odiv1.offsetWidth-odiv2.offsetWidth){
+				odiv2.style.left=odiv1.offsetWidth-odiv2.offsetWidth+'px';
+				}else if(odiv2.offsetTop<0){
+					odiv2.style.top=0;
+					}else if(odiv2.offsetTop>odiv1.offsetHeight-odiv2.offsetHeight){
+						odiv2.style.top=odiv1.offsetHeight-odiv2.offsetHeight+'px';
+						}
+		}
+	document.onmouseup=function(ev){
+		var ev=ev||window.event;
+		document.onmousemove=null;
+		
+		}
+	
+	}
+
+
+}
+</script>
+</head>
+
+<body>
+<div id="div1">
+
+<div id="div2"></div>
+
+</div>
+
+
+</body>
+</html>

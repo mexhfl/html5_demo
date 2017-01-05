@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>购物车</title>
+<style>
+*{
+	margin:0px;
+	padding:0px;
+	}
+li{
+	list-style:none;
+	float:left;
+	width:200px;
+	border:1px #000000 solid;
+	margin:10px;
+	}
+li img{
+	width:200px;}
+p{border-bottom:1px #333 dashed;
+height:20px;}
+#div1{
+	width:600px;
+	height:300px;
+	border:1px #000000 solid;
+	clear:both;
+	margin-left:10px;
+	}
+.box1{float:left;width:200px;}
+.box2{float:left;width:200px;}
+.box3{float:left;width:200px;}
+#allmoney{float:right;}
+</style>
+<script>
+window.onload=function(){
+	var ali=document.getElementsByTagName('li');
+	var odiv=document.getElementById('div1');
+	var obj={};
+	var inum=0;
+	var allmoney=null;
+	
+	for(var i=0;i<ali.length;i++){
+		ali[i].ondragstart=function(ev){
+			var ap=this.getElementsByTagName('p');
+			ev.dataTransfer.setData('title',ap[0].innerHTML);
+			ev.dataTransfer.setData('money',ap[1].innerHTML);
+			ev.dataTransfer.setDragImage(this,0,0);
+			};
+		}
+		odiv.ondragover=function(ev){
+			ev.preventDefault();
+			};
+		odiv.ondrop=function(ev){
+			ev.preventDefault();
+			var stitle=ev.dataTransfer.getData('title');
+			var smoney=ev.dataTransfer.getData('money');
+			if(!obj[stitle]){
+			var op=document.createElement('p');
+			var ospan=document.createElement('span');
+			ospan.className='box1';
+			ospan.innerHTML='1';
+			op.appendChild(ospan);
+			var ospan=document.createElement('span');
+			ospan.className='box2';
+			ospan.innerHTML=stitle;
+			op.appendChild(ospan);
+			var ospan=document.createElement('span');
+			ospan.className='box3';
+			ospan.innerHTML=smoney;
+			op.appendChild(ospan);
+			odiv.appendChild( op );
+			obj[stitle] = 1;
+			}else{
+			var box1 = document.getElementsByClassName('box1');
+			var box2 = document.getElementsByClassName('box2');
+			
+			for(var i=0;i<box2.length;i++){
+			
+				if(box2[i].innerHTML == stitle){
+					box1[i].innerHTML = parseInt(box1[i].innerHTML) + 1;
+				}
+			
+			}
+			}
+			    
+				if(!allmoney){
+				allmoney=document.createElement('div');	
+				allmoney.id='allmoney';
+				
+				}
+				inum+=parseInt(smoney);
+				allmoney.innerHTML=inum+'￥';
+				odiv.appendChild(allmoney);
+			}
+	}
+</script>
+
+</head>
+
+<body>
+<ul>
+<li draggable="true">
+<img src="yyjc.jpg"/>
+<p>Javascript语言精粹</p>
+<p>40￥</p>
+</li>
+ <li draggable="true">
+<img src="qwzn.jpg"/>
+<p>Javascript权威指南</p>
+<p>120￥</p>
+</li>
+ <li draggable="true">
+<img src="jtjs.jpg"/>
+<p>精通Javascript</p>
+<p>35￥</p>
+</li>
+ <li draggable="true">
+<img src="bcys.jpg"/>
+<p>DOM编程艺术</p>
+<p>45￥</p>
+</li>
+</ul>
+<div id="div1">
+<!--	<p>
+		<span class="box1">1</span>
+		<span class="box2">DOM编程艺术</span>
+		<span class="box3">45￥</span>
+	</p>
+	<p>
+		<span class="box1">1</span>
+		<span class="box2">DOM编程艺术</span>
+		<span class="box3">45￥</span>
+	</p>
+    <div id="allmoney">90￥</div>-->
+</div>
+</body>
+</html>

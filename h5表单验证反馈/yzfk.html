@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+</head>
+
+<body>
+
+<form>
+<input type="text" required id="text" maxlength="5" />
+<input type="submit"/>
+</form>
+<script>
+var oText=document.getElementById("text");
+oText.addEventListener("invalid",fn,false);
+oText.value="1234567890";
+function fn(){
+	alert(this.validity.tooLong);
+	ev.preventDefault()
+
+	}
+</script>
+</body>
+</html>

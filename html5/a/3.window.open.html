@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+/*
+iframe
+window.open
+*/
+window.onload=function(){
+	
+	var newWindow=null;
+	
+	var obtn=document.getElementById('btn1');
+	var obtn2=document.getElementById('btn2');
+	
+	obtn.onclick=function(){
+		newWindow=window.open('4.window.open.html','_blank');
+		}
+	obtn2.onclick=function(){
+		newWindow.document.body.style.background = 'yellow';
+		}
+		
+	}
+</script>
+</head>
+
+<body>
+<input type="button" id="btn1" value="点击打开一个新窗口,打开4.window.open.html"/>
+<input type="button" id="btn2" value="点击修改4.window.open.html背景色"/>
+</body>
+</html>

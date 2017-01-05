@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<form>
+<input type="email" value="邮箱"/>
+<input type="submit"/>
+
+</form>
+<form>
+<input type="search" value="搜索"/>
+<input type="submit"/>
+</form>
+<form>
+<input type="range" step="2" max="8" min="2" />
+<input type="submit"/>
+</form>
+<form>
+<input type="number" step="2" max="8" min="2"  />
+<input type="submit"/>
+</form>
+<form>
+<input type="color"/>
+<input type="submit"/>
+</form>
+<form>
+<input type="time"/>
+<input type="submit"/>
+</form>
+<form>
+<input type="tel" placeholder="数字键盘" autofocus required/>
+<input type="submit"/>
+</form>
+<form>
+<input type="text" placeholder="请输入字符" list="zifu" autofocus/>
+<datalist id="zifu">
+<option value="字符1">字符1</option>
+<option value="字符2">字符2</option>
+<option value="字符3">字符3</option>
+
+</datalist>
+<input type="submit"/>
+</form>
+<form action="http://www.baidu.com">
+<input type="text" placeholder="请输入5-55个字符" name="user" autocomplete="off" pattern="\d{5,55}"/>
+<input type="submit"/>
+<input type="submit" formaction="http://www.qq.com" value="清除验证保存至草稿" formnovalidate/>
+</form>
+</body>
+</html>

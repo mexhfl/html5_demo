@@ -1,0 +1,32 @@
+绘制方块
+fillRect(L,T,W,H)：默认颜色是黑色
+strokeRect(L,T,W,H)：带边框的方块
+	-默认一像素黑色边框，加0.5显示细框
+设置绘图
+fillStyle：填充颜色(绘制canvas是有顺序的)
+lineWidth：线宽度，是一个数值
+strokeStyle：边框颜色
+
+边界绘制
+lineJoin：边界链接点样式
+	-miter(默认)、round(圆角)、bevel(斜角)
+lineCap：端点样式
+	-butt(默认)、round(圆角)、square(高度多出为宽一半的值)
+
+绘制路径_1
+beginPath：开始绘制路径
+closePath：结束绘制路径
+moveTo：移动到绘制的新目标点
+lineTo：新的目标点
+
+绘制路径
+stroke：画线，默认黑色；
+fill：填充，默认黑色；
+rect：矩形区域；
+clearRect：删除一个画布的矩形区域
+save：保存路径
+restore：恢复路径
+小例子1：鼠标画线
+小例子2：方块移动
+
+*.canvas设置画布大小只能在行间设置width和height值，用css声明大小则为等比缩放画布

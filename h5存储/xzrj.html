@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>行走日记</title>
+<style>
+*{ margin:0; padding:0;}
+li{ list-style:none;}
+#div1,#div2{ float:left; width:400px; height:400px; border:1px #000000 solid; margin:10px; position:relative; overflow:hidden;}
+#div2 ul{ position:absolute; left:0; width:2000px;}
+#div2 ul .box{ width:400px; height:400px; float:left; overflow:hidden;}
+#div2 #childUl{ width:400px;}
+#childUl li{ width:400px; border-bottom:1px #666666 dashed;}
+#map{ width:100%; height:380px;}
+</style>
+<script src="move.js" ></script>
+<script src="http://api.map.baidu.com/api?v=1.3"></script>
+<script>
+window.onload=function(){
+var odiv=document.getElementById('div1');
+var ai=odiv.getElementsByTagName('input');
+var ot=document.getElementById('t1');
+var oc=document.getElementById('childUl');
+var ali=oc.getElementsByTagName('li');
+var oul=document.getElementById('ul1');
+var abox=oul.getElementsByClassName('box');
+var abox1_input=abox[1].getElementsByTagName('input');
+var abox1_div=abox[1].getElementsByTagName('div');
+var obox2_input=abox[2].getElementsByTagName('input')[0];
+
+var inow=window.localStorage.getItem('num')||0;
+
+
+if(window.localStorage.getItem('num')){
+	for(var i=0;i<inow;i++){
+		var oli=document.createElement('li');
+		oli.innerHTML=window.localStorage.getItem('title'+i);
+		oc.appendChild(oli);
+		}
+		changeli();
+	}
+	
+
+
+
+ai[1].onclick=function(){
+	window.localStorage.setItem('title'+inow,ai[0].value);
+	window.localStorage.setItem('ta'+inow,ot.value);
+	createli();
+	inow++;
+	window.localStorage.setItem('num',inow);
+	}
+ai[3].onclick=function(){
+	window.localStorage.clear();
+	}
+	
+	
+ai[4].onclick = function(){
+		
+		var This = this;
+		
+		navigator.geolocation.getCurrentPosition(function(position){
+			
+			var y = position.coords.longitude;
+			var x = position.coords.latitude;
+			
+			
+			if( This.checked ){
+				window.localStorage.setItem('y'+inow,y);
+				window.localStorage.setItem('x'+inow,x);
+				
+			}
+			else{
+				window.localStorage.removeItem('y'+inow);
+				window.localStorage.removeItem('x'+inow);	
+			}
+		});
+};
+	
+	
+	
+function createli(){
+	var oli=document.createElement('li');
+	oli.innerHTML=window.localStorage.getItem('title'+inow);
+	oc.appendChild(oli);
+	changeli();
+	}
+function changeli(){
+	for(var i=0;i<ali.length;i++){
+		ali[i].index=i;
+		ali[i].onclick=function(){
+			 
+			startMove(oul,{left:-abox[0].offsetWidth});
+			abox1_div[0].innerHTML=window.localStorage.getItem('title'+this.index);
+			abox1_div[1].innerHTML=window.localStorage.getItem('ta'+this.index);
+			/*
+			if( window.localStorage.getItem('y'+this.index) ){
+					abox1_input[1].disabled = false;
+					
+				}
+				else{
+					abox1_input[1].disabled = true;
+				}
+				
+				index = this.index;
+			
+			*/
+			}
+		}
+	}
+	
+	abox1_input[0].onclick=function(){
+		startMove(oul,{left:0});
+		}
+	abox1_input[1].onclick=function(){
+		startMove(oul,{left:-2*abox[0].offsetWidth});
+		
+		//地图信息
+		
+	var map = new BMap.Map("map");
+	var point = new BMap.Point(112.763294,37.714299);
+	map.centerAndZoom(point, 15);
+	var marker = new BMap.Marker(point);  // 创建标注
+	map.addOverlay(marker);               // 将标注添加到地图中
+	marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+	map.enableScrollWheelZoom();     //允许滚轮缩放
+	
+	
+		}
+	obox2_input.onclick=function(){
+		startMove(oul,{left:-abox[0].offsetWidth});
+		}
+}
+
+</script>
+</head>
+
+<body>
+<div id="div1">
+标题:<input type="text" /><br />
+内容:<textarea id="t1" style="height:300px; width:300px;"></textarea><br />
+<input type="button" value="保存本地" />
+<input type="button" value="同步服务器" />
+<input type="button" value="删除所有数据" />
+<input type="checkbox" />记录地图位置
+</div>
+<div id="div2">
+	<ul id="ul1">
+		<li class="box">
+			<ul id="childUl">
+			</ul>
+		</li>
+		<li class="box">
+			<input type="button" value="后退" />
+			<input style="float:right" type="button" value="前进" />
+			<div></div>
+			<div></div>
+		</li>
+		<li class="box">
+			<input type="button" value="后退" />
+			<div id="map"></div>
+		</li>
+	</ul>
+</div>
+</body>
+</html>

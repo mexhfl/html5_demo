@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+/*
+iframe
+window.open
+*/
+window.onload=function(){
+	var obtn=document.getElementById('btn');
+	obtn.onclick=function(){
+		window.opener.document.body.style.background='blue';
+		}
+	
+	}
+</script>
+</head>
+
+<body>
+这是a.com下4.window.open.html页面
+<input type="button" id="btn" value="点击修改3.window.open.html背景色"/>
+</body>
+</html>

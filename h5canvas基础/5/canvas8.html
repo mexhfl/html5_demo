@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<script type="text/javascript" src="jCanvaScript.1.5.18.min.js" ></script>
+<style>
+body{ background:#000;}
+#c1{ background:#FFF;}
+
+</style>
+<script>
+window.onload=function(){
+	var oimg=document.getElementById('img1');
+	var obut=document.getElementById('input1');
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	
+	jc.start('c1',true);
+	
+	jc.circle(100,100,50,'#ff00ff',1).draggable().id('asd');
+	
+	jc.start('c1');
+	
+	obut.onclick=function(){
+		jc('#asd').animate({x:200,y:200,radius:10,color:'#ffff00'},5000);
+		}
+	
+}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+<input id="input1" type="button" value="点击" />
+</body>
+</html>

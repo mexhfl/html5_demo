@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>自制播放器</title>
+
+<script>
+window.onload=function(){
+	var ov=document.getElementById('v1');
+	var ai=document.getElementsByTagName('input');
+	var timer=null;
+	ai[0].onclick=function(){
+		if(ov.paused){
+			ov.play();
+			this.value='暂停';
+			nowtime();
+			timer=setInterval(nowtime,1000);
+		}else{
+			ov.pause();
+			this.value='播放';
+			clearInterval(timer);
+			}
+		}
+		
+		
+	ai[2].value=changetime(ov.duration);
+	
+	ai[3].onclick=function(){
+	
+	if(ov.muted){
+		ov.volume=1;
+		this.value='静音';
+		ov.muted=false;
+	}else{
+		ov.volume=0;
+		this.value='取消静音';
+		ov.muted=true;
+	}
+	
+	}
+	
+	ai[4].onclick=function(){
+		ov.mozRequestFullScreen();
+	}
+	
+	function nowtime(){
+	ai[1].value=changetime(ov.currentTime);
+	ai[1].value=changetime(ov.currentTime);
+	}
+	
+	
+	function changetime(inum){
+	inum=parseInt(inum);
+	var H=tozero(Math.floor(inum/3600));
+	var M=tozero(Math.floor(inum%3600/60));
+	var S=tozero(Math.floor(inum%60));
+	return H+':'+M+':'+S;
+	}
+	
+	function tozero(num){
+		if(num<=9){
+			return '0'+num;
+		}else{
+			return ''+num;
+		}
+	}
+	
+	
+	
+	}
+</script>
+
+</head>
+
+<body>
+
+<video id="v1">
+	<source src="Intermission-Walk-in_512kb.mp4" type="video/mp4"></source>
+    <source src="Intermission-Walk-in.ogv"></source>
+</video>
+<br>
+<input type="button" value="播放"/>
+<input type="button" value="00:00:00"/>
+<input type="button" value="00:00:00"/>
+<input type="button" value="静音"/>
+<input type="button" value="全屏"/>
+</body>
+</html>

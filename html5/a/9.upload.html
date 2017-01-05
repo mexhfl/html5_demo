@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无刷新上传</title>
+<script>
+
+window.onload=function(){
+	var obtn=document.getElementById('btn');
+	var ofile=document.getElementById('myfile');
+	
+	obtn.onclick=function(){
+/*		for(var attr in ofile.files[0]){
+			console.log(attr+':'+ofile.files[0][attr]);
+			}*/
+			var xhr=new XMLHttpRequest();
+			xhr.onload=function(){
+				alert(1);
+				}
+			xhr.open('post','post_file.php',true);
+			xhr.setRequestHeader('X-Request-With','XMLHttpRequest');
+			//xhr.send('file='+ofile.files[0]);
+			var oform=new FormData();
+			oform.append('file',ofile.files[0]);
+			xhr.send(oform);
+		}
+	}
+
+</script>
+</head>
+
+<body>
+<input type="file" id="myfile"/>
+<input type="button" id="btn" value="上传"/>
+</body>
+</html>

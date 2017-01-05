@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>视频与canvas结合</title>
+
+<script>
+window.onload=function(){
+	var ov=document.getElementById('vid');
+	var oc=document.getElementById('c1');
+	occ=oc.getContext('2d');
+	
+	oc.width=ov.videoWidth;
+	oc.height=ov.videoHeight;
+	
+	
+	setInterval(function(){
+		occ.drawImage(ov,0,0);
+		},30);
+	}
+</script>
+</head>
+
+<body>
+<video controls id="vid">
+	<source src="Intermission-Walk-in_512kb.mp4" type="video/mp4"></source>
+    <source src="Intermission-Walk-in.ogv"></source>
+</video>
+<canvas id="c1">
+	<span>浏览器不支持canvas</span>
+</canvas>
+</body>
+</html>

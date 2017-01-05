@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script>
+window.onload=function(){
+	var ai=document.getElementsByTagName('input');
+	
+	for(i=0;i<ai.length;i++){
+		ai[i].onclick=function(){
+			if(this.checked){
+				window.localStorage.setItem('sel',this.value);
+				}else{
+				window.localStorage.setItem('onSel',this.value);
+					}
+			}
+		}
+		
+	window.addEventListener('storage',function(ev){
+
+		if(ev.key=='sel'){
+			for(i=0;i<ai.length;i++){
+				if(ev.newValue==ai[i].value){
+					ai[i].checked=true;
+					}
+				}
+			}else if(ev.key=='onSel'){
+				for(var i=0;i<ai.length;i++){
+				if( ev.newValue == ai[i].value ){
+					ai[i].checked = false;
+				}
+				}
+				}
+		},false);
+	}
+</script>
+</head>
+
+<body>
+<input type="checkbox" value="香蕉"/>香蕉<br>
+<input type="checkbox" value="苹果"/>苹果<br>
+<input type="checkbox" value="西瓜"/>西瓜<br>
+<input type="checkbox" value="哈密瓜"/>哈密瓜<br>
+ 
+</body>
+</html>

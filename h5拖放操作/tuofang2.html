@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>拖放2</title>
+<style>
+li{
+	width:100px;
+	height:30px;
+	background:yellow;
+	margin:10px;
+	list-style:none;
+	}
+#div1{
+	width:100px;
+	height:100px;
+	background:red;
+	margin:200px;
+	
+	}
+</style>
+<script>
+window.onload=function(){
+	
+	var odiv=document.getElementById('div1');
+	var oul=document.getElementsByTagName('ul')[0];
+	var ali=oul.getElementsByTagName('li');
+	var i=0;
+	for(i=0;i<ali.length;i++){
+		ali[i].index=i;
+		ali[i].ondragstart=function(ev){
+			
+			var ev=ev || window.event;
+			//ev.dataTransfer.setData('name','hello');
+			ev.dataTransfer.setData('name',this.index);
+			ev.dataTransfer.effectAllowed='link';
+			ev.dataTransfer.setDragImage(odiv,55,55);
+			this.style.background='green';
+			
+			}
+/*		ali[i].ondrag=function(){
+			document.title=i++;
+			}*/
+		ali[i].ondragend=function(){
+			this.style.background='yellow';
+			}
+		}
+	odiv.ondragenter=function(){
+		this.style.background='blue';
+		}
+	odiv.ondragover=function(ev){
+		document.title=i++;
+		ev.preventDefault();
+		}
+		odiv.ondragleave=function(){
+		this.style.background='red';
+		}
+	odiv.ondrop=function(ev){
+		//alert(ev.dataTransfer.getData('name'));
+		oul.removeChild(ali[ev.dataTransfer.getData('name')]);
+			for(i=0;i<ali.length;i++){
+		ali[i].index=i;
+			}
+		} 
+	}
+	
+</script>
+</head>
+
+<body>
+<ul>
+<li draggable="true">a</li>
+<li draggable="true">b</li>
+<li draggable="true">c</li>
+</ul>
+<div id="div1"></div>
+</body>
+</html>

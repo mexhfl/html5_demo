@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>琴键导航</title>
+<style>
+*{padding:0px; margin:0px;}
+#ul1{width:1000px;height:30px;}
+#ul1 li{ list-style:none; width:100px; height:30px; background:#00F; color:#FFF; border:1px #000 solid; float:left; line-height:30px; text-align:center;}
+</style>
+<script>
+window.onload=function(){
+	var oa=document.getElementById('a1');
+	var ali=document.getElementsByTagName('li');
+	
+	for(var i=0;i<ali.length;i++){
+		ali[i].onmouseover=function(){
+			oa.src='http://s8.qhimg.com/share/audio/piano1/'+this.getAttribute('au')+'4.mp3';			oa.play();
+			}
+		}
+	}
+
+</script>
+
+
+</head>
+
+<body>
+<ul id="ul1">
+	<li au='a'>111111</li>
+    <li au='b'>222222</li>
+    <li au='c'>333333</li>
+    <li au='d'>444444</li>
+    <li au='e'>555555</li>
+    <li au='f'>666666</li>
+    <li au='g'>777777</li>
+    
+</ul>
+<audio id="a1"></audio>
+</body>
+</html>

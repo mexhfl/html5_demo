@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>h5播放器</title>
+<script>
+window.onload=function(){
+	var ov=document.getElementById('vid');
+	var obtn=document.getElementById('btn');
+	var asrc=ov.getElementsByTagName('source');
+	obtn.onclick=function(){
+		asrc[0].src='xxx.mp4';
+		asrc[1].src='yyy.mp4';
+		ov.load();
+		}
+	
+	ov.poster='2.png';
+	ov.width=500;
+	ov.height=500;
+	
+	ov.onmouseover=function(){
+		ov.play();
+		}
+	ov.onmouseout=function(){
+		ov.pause();
+		}
+	
+	
+	ov.addEventListener('ended',function(){
+		alert('end');
+		},false);
+		
+		
+		
+	console.log( ov.duration );
+	console.log( ov.volume );
+	
+	console.log( ov.muted );
+	
+	console.log( ov.paused );
+	console.log( ov.ended );
+	console.log( ov.error );
+	console.log( ov.currentSrc );
+		
+		
+	}
+	
+	
+
+</script>
+</head>
+
+<body>
+<input type="button" value="切换到错误源" id="btn"/>
+<video controls id="vid">
+	<source src="Intermission-Walk-in_512kb.mp4" type="video/mp4"></source>
+    <source src="Intermission-Walk-in.ogv"></source>
+</video>
+</body>
+</html>

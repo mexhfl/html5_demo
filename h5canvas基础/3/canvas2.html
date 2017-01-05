@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+body{ background:#000;}
+#c1{ background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	var obj=occ.createLinearGradient(100,100,200,200);
+	obj.addColorStop(0,'red');
+	obj.addColorStop(0.3,'yellow');
+	obj.addColorStop(0.6,'green');
+	obj.addColorStop(1,'blue');
+	occ.fillStyle=obj;
+	occ.fillRect(100,100,100,100);
+	}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+</body>
+</html>

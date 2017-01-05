@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style>
+body{ background:#000;}
+#c1{ background:#FFF;}
+img{ background:#FFF;}
+</style>
+<script>
+window.onload=function(){
+	var oimg=document.getElementById('img1');
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	
+	occ.fillRect(0,0,100,100);
+	 
+	occ.fillStyle='red';
+	occ.globalCompositeOperation='xor';
+	occ.fillRect(50,50,100,100);
+	
+	oimg.src=oc.toDataURL();
+	
+	}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+<img id="img1" src=""/>
+</body>
+</html>

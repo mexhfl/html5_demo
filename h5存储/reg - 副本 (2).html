@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>注册</title>
+<script>
+window.onload=function(){
+	var ai=document.getElementsByTagName('input');
+	var ot=document.getElementById('t1');
+	var obtn=document.getElementById('btn');
+	
+	obtn.onclick=function(){
+		window.localStorage.clear();
+		}
+	
+	
+	if(window.localStorage.getItem('name')){
+		ai[0].value=window.localStorage.getItem('name');
+		}
+		
+	if(window.localStorage.getItem('sex')){
+		for(i=1;i<ai.length;i++){
+			if(ai[i].value==window.localStorage.getItem('sex')){
+				ai[i].checked=true;
+				}
+			}
+		}
+	if(window.localStorage.getItem('text')){
+		ot.value=window.localStorage.getItem('text');
+		}
+	if(window.localStorage.getItem('text')){
+		ai[2].value=window.localStorage.getItem('text');
+		}
+	
+	window.onunload=function(){
+		if(ai[0].value){
+			window.localStorage.setItem('name',ai[0].value);
+			}
+		for(i=1;i<ai.length-1;i++){
+			if(ai[i].checked==true){
+				window.localStorage.setItem('sex',ai[i].value);
+				}
+			}
+		
+		if(ot.value){
+				window.localStorage.setItem('text',ot.value);
+				
+			}	
+		
+		}
+	}
+</script>
+</head>
+
+<body>
+<p>
+	用户名：<input type="text"/>
+</p>
+<p>
+	性别：<input type="radio" value="男" name="sex"/>男
+    	 <input type="radio" value="女" name="sex"/>女
+</p>
+
+内容：<textarea id="t1"></textarea>
+<input type="button" id="btn"/>
+</body>
+</html>

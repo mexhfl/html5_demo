@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>iframe</title>
+<script>
+window.onload=function(){
+	var obtn=document.getElementById('btn1');
+	var oif=document.getElementById('ifr');
+	obtn.onclick=function(){
+		oif.contentWindow.postMessage('asd','http://www.b.com');
+		}
+	}
+</script>
+</head>
+
+<body>
+<input type="button" id="btn1" value="点击传数据"/>
+<iframe id="ifr" src="http://www.b.com/3.postMessage.html"/>
+</body>
+</html>

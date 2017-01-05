@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>拖放1</title>
+<style>
+li{
+	width:100px;
+	height:30px;
+	background:yellow;
+	margin:10px;
+	list-style:none;
+	}
+#div1{
+	width:100px;
+	height:100px;
+	background:red;
+	margin:200px;
+	
+	}
+</style>
+<script>
+window.onload=function(){
+	var ali=document.getElementsByTagName('li');
+	var odiv=document.getElementById('div1');
+	for(i=0;i<ali.length;i++){
+		ali[i].ondragstart=function(){
+			this.style.background='green';
+			}
+/*		ali[i].ondrag=function(){
+			document.title=i++;
+			}*/
+		ali[i].ondragend=function(){
+			this.style.background='yellow';
+			}
+		}
+	odiv.ondragenter=function(){
+		this.style.background='blue';
+		}
+	odiv.ondragover=function(ev){
+		document.title=i++;
+		ev.preventDefault();
+		}
+	odiv.ondragleave=function(){
+		this.style.background='red';
+		}
+	odiv.ondrop=function(){
+		alert('123');
+		}
+	}
+	
+</script>
+</head>
+
+<body>
+<ul>
+<li draggable="true">a</li>
+<li draggable="true">b</li>
+<li draggable="true">c</li>
+</ul>
+<div id="div1"></div>
+</body>
+</html>

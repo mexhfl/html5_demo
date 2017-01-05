@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<script type="text/javascript" src="jCanvaScript.1.5.18.min.js" ></script>
+<style>
+body{ background:#000;}
+#c1{ background:#FFF;}
+
+</style>
+<script>
+window.onload=function(){
+	var oimg=document.getElementById('img1');
+	var oc=document.getElementById('c1');
+	var occ=oc.getContext('2d');
+	
+	jc.start('c1',true);
+	
+	jc.circle(100,100,50,'ff00ff',1).click(function(){
+		alert(123);
+		});
+	
+	jc.start('c1');
+}
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="400px" height="400px">
+	<span style="color:#09F">浏览器不支持canvas</span>
+</canvas>
+
+</body>
+</html>
