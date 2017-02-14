@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>小球碰撞2</title>
+	<meta charset="utf-8" />
+    <style>
+        #ballcanvas{
+            margin:auto;
+            border:1px solid #00f;
+        }
+    </style>
+    <script>
+
+        var ballCount=100;
+        window.addEventListener("load", function () {
+            var canvas = document.getElementById("ballcanvas");
+            var context = canvas.getContext("2d");
+            maxWidth = canvas.width;
+            maxHeight = canvas.height;
+            
+            //小球颜色
+            var colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444", "#CC0000"];
+            
+            //随机数
+            function random(min, max) {
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+            
+            //构造函数
+            function normalBall() {
+                this.r = random(10, 30);
+                this.ix = true;
+                this.iy = true;
+                this.color = colors[parseInt(Math.random() * colors.length)];
+                this.vx = random(30, maxWidth-30);
+                this.vy = random(30, maxHeight-30);
+                this.speedx = random(1, 20);
+                this.speedy = random(1, 20);
+            }
+
+            //创建小球原型
+            normalBall.prototype.ballMove = function () {
+                context.beginPath();
+                if (this.ix) {
+                    this.vx += this.speedx;
+                    if (this.vx >= maxWidth - this.r) {
+                        this.ix = false;
+                    }
+                } else {
+                    this.vx -= this.speedx;
+                    if(this.vx<=this.r){
+                        this.ix = true;
+                    }
+                }
+
+                if (this.iy) {
+                    this.vy += this.speedy;
+                    if (this.vy >= maxHeight - this.r) {
+                        this.iy = false;
+                    }
+                } else {
+                    this.vy -= this.speedy;
+                    if (this.vy <= this.r) {
+                        this.iy = true;
+                    }
+                }
+                context.fillStyle = this.color;
+                context.arc(this.vx, this.vy, this.r, 0, Math.PI * 2, true);
+                context.fill();
+            }
+
+            //实例化小球
+            var balls = [];
+
+            var a = 0;
+            //设置运动
+            setInterval(function () {
+                if (balls.length<ballCount) {
+                    balls[a] = new normalBall();
+                    a++;
+                }
+
+                context.clearRect(0, 0, maxWidth, maxHeight);
+                for (var i = 0; i < balls.length; i++) {
+                    balls[i].ballMove();
+                }
+            }, 30);
+        });
+    </script>
+</head>
+<body>
+    <canvas width="600" height="600" id="ballcanvas"></canvas>
+</body>
+</html>
